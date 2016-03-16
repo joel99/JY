@@ -1,24 +1,24 @@
-//Joel Ye
+//Team JY - Joel Ye and Jennifer Yu
 //APCS1 pd10
-//HW12a -- Truckin' Through the Night
-//2016 - 03 - 14
+//HW14a -- On the DLL
+//2016 - 03 - 16
 
 public class LList implements List{
-    private LLNode node;
+    private DLLNode head;
     private int size; //tracks size to avoid excessive calculation each time.
     
     public LList(){
-	node = null;
+	head = null;
 	size = 0;
     }
 	
-    public LList(LLNode newNode){
-	node = newNode;
-	LLNode temp = node;
+    public LList(DLLNode newNode){
+	head = newNode;
+	DLLNode temp = head;
 	size = 1;
-	while (temp.getLink() != null){
+	while (temp.getNext() != null){
 	    size += 1;
-	    temp = temp.getLink();
+	    temp = temp.getNext();
 	}
     }
 	
@@ -26,46 +26,54 @@ public class LList implements List{
 	
     public boolean add(String x){
 	try{
-	    LLNode newLead = new LLNode(x, node);
-	    node = newLead;
-	    size += 1;
+	    DLLNode newHead = new DLLNode(x);
+	    newLead.setNext(head);
+	    head.setPrev(newHead);
+	    head = newHead;
+	    size ++;
 	    return true;
 	}
 	catch(Exception e){return false;}
     }
-	
-    public void add(String x, index i){
-	LLNode tmp = node;
-	for (; i > 0; i++){
-	    tmp = tmp.getNext();
-	}
-	LLNode tmp2 = tmp.getNext();
-	tmp.setLink(new LLNode(x));
-	tmp.getNext().setLink(tmp2);
+
+    public void add(String x, int i){
+	if ( i < 0 || i > size() )
+	    throw new IndexOutOfBoundsException();
 	size++;
-	return true;
-    }
+	if (i == 0) {add(x); return;}
+	DLLNode tmp = head;
+	for (; i > 0; i--) tmp = tmp.getLink();
+	tmp.getPrev.setNext(new DLLNode(x));
+	tmp.setPrev(tmp.getPrev().getNext());
+    }	
 
     public String remove(int i){
-	if (i < 0 || i >= size) return "";
-        LLNode tmp = node;
+	if ( i < 0 || i >= size() )
+	    throw new IndexOutOfBoundsException();
+	size--;
+	DLLNode temp = head;
 	if (i == 0) {
-	    node = node.getNext();}
-	for (; i > 0; i++){
-	    tmp = tmp.getNext();
+	    head = head.getNext();
+	    head.setPrev(null);
+	    return temp.getVal();}
+	for (; i > 0; i--){
+	    temp = temp.getLink();
 	}
-	
+	String ret = temp.getVal();
+	temp.getPrev().setNext(temp.getNext());
+	temp.getNext().setPrev(temp.getPrev());
+	return ret;
     }
 
     public String get(int i){
-	LLNode temp = node;
-	while (i > 0) {temp = temp.getLink(); i--;}
+	DLLNode temp = head;
+	while (i > 0) {temp = temp.getNext(); i--;}
 	return temp.getVal();
     };
 	
     public String set(int i, String x){
-	LLNode temp = node;
-	while (i > 0) {temp = temp.getLink(); i--;}
+	DLLNode temp = head;
+	while (i > 0) {temp = temp.getNext(); i--;}
 	return temp.setVal(x);
     };
 
