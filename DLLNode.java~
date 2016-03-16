@@ -1,0 +1,31 @@
+//Joel Ye
+//APCS1 pd10
+//HW12a -- We got a Big Ol' Convoy
+//2016 - 03 - 14
+public class LLNode{
+	private String val;
+	private Node link;
+	public LLNode(String val){
+	this.val = val;
+	}
+	public LLNode(String val, Node link){
+	this.val = val;
+	this.link = link;
+	}
+	public String getVal(){
+	return val;
+	}
+	public String setVal(String newVal){
+	String temp = val;
+	val = newVal;
+	return temp; 
+	}
+	public LLNode getLink(){
+	return link;
+	}
+	public LLNode setLink(LLNode newLink){
+	LLNode temp = link;
+	link = newLink;
+	return temp;
+	}
+}
