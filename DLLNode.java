@@ -1,4 +1,4 @@
-//Team JY - Joel Ye and Jennifer Yu
+//Team Double Trouble - Joel Ye and Jennifer Yu
 //APCS1 pd10
 //HW14a -- On the DLL
 //2016 - 03 - 16

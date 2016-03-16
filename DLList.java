@@ -1,4 +1,4 @@
-//Team JY - Joel Ye and Jennifer Yu
+//Team Double Trouble - Joel Ye and Jennifer Yu
 //APCS1 pd10
 //HW14b -- On the DLL
 //2016 - 03 - 16
@@ -17,7 +17,7 @@ public class DLList implements List{
 	DLLNode temp = head;
 	size = 1;
 	while (temp.getNext() != null){
-	    size += 1;
+	    size++;
 	    temp = temp.getNext();
 	}
     }
@@ -58,25 +58,19 @@ public class DLList implements List{
     public String remove(int i){ //remove
 	if ( i < 0 || i >= size ) //if not in range
 	    throw new IndexOutOfBoundsException();
+	size--;
 	DLLNode temp = head; //set alias to the head
 	if (i == 0) { //if removing first node
 	    head = head.getNext(); //set next node as new head
 	    head.setPrev(null); //cut it off from removed node
-	    size--; //increment size
 	    return temp.getVal();} //return alias of old head
 	for (; i > 0; i--){ //if removing another node
 	    temp = temp.getNext(); //set alias to node at index
 	}
-	if (i == size-1) {
-		String ret = temp.getVal(); //store first value
-		temp.getPrev().setNext(null); //set prev node as last node
-		size--; //increment size
-		return ret; //return stored value
-	}
 	String ret = temp.getVal(); //store first value
 	temp.getPrev().setNext(temp.getNext()); //set prev node's next to next
-	temp.getNext().setPrev(temp.getPrev()); //set next node's prev to prev
-	size--; //increment size
+	if (temp.getNext() != null)
+		temp.getNext().setPrev(temp.getPrev()); //set next node's prev to prev
 	return ret; //return stored value
     }
 
