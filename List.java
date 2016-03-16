@@ -1,3 +1,8 @@
+//Team JY - Joel Ye and Jennifer Yu
+//APCS1 pd10
+//HW14 -- On the DLL
+//2016 - 03 - 16
+
 /*****************************************************
  * interface List -- subset of actual Java List interface
  * Specifies actions a List must be able to perform.
