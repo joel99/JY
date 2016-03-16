@@ -1,4 +1,8 @@
+//Team JY - Joel Ye and Jennifer Yu
+//APCS1 pd10
+//HW14a -- On the DLL
 //2016 - 03 - 16
+
 public class DLLNode{
     private String val;
     private DLLNode next;
@@ -9,7 +13,7 @@ public class DLLNode{
     }
     public DLLNode(String val, DLLNode prev, DLLNode next){
 	this.val = val;
-	this.link = link;
+	this.next = next;
     }
     public String getVal(){
 	return val;
@@ -22,18 +26,18 @@ public class DLLNode{
     public DLLNode getNext(){
 	return next;
     }
-    public DLLNode setNext(DLLNode newLink){
+    public DLLNode setNext(DLLNode newNext){
 	DLLNode temp = next;
-	next = newLink;
+	next = newNext;
 	return temp;
     }
 
     public DLLNode getPrev(){
 	return prev;
     }
-    public DLLNode setPrev(DLLNode newLink){
+    public DLLNode setPrev(DLLNode newPrev){
 	DLLNode temp = prev;
-	prev = newLink;
+	prev = newPrev;
 	return temp;
     }
 }
