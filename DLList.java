@@ -1,41 +1,31 @@
 //Team Double Trouble - Joel Ye and Jennifer Yu
 //APCS1 pd10
-//HW14b -- On the DLL
-//2016 - 03 - 16
-
-public class DLList implements List{
+//HW15 -- Generically Speaking
+//2016 - 03 - 17
+public class LList<T> implements List{
     private DLLNode head;
+    private DLLNode tail;
     private int size; //tracks size to avoid excessive calculation each time.
     
-    public DLList(){ //default constructor
+    public LList(){ //default constructor
 	head = null;
 	size = 0;
     }
-	
-    public DLList(DLLNode newNode){ //constructor with node
-	head = newNode;
-	DLLNode temp = head;
-	size = 1;
-	while (temp.getNext() != null){
-	    size++;
-	    temp = temp.getNext();
-	}
-    }
-	
+        
     public int size(){return size;}; //size
 	
-    public boolean add(String x){ //add
+    public boolean add(DLLNode blah){ //add
 	try{
-		if (size == 0) {
-			DLLNode newHead = new DLLNode (x, null, null);
-			head = newHead; //new node is the new head
-		}
-		else {
-	    DLLNode newHead = new DLLNode(x); //create alias for new node
-	    newHead.setNext(head); //set next as the formerly-first node
-	    head.setPrev(newHead); //set formerly-first node's previous to new node
-	    head = newHead; //new node is the new head
-		}
+	    if (size == 0) {
+		DLLNode newHead = new DLLNode (x, null, null);
+		head = newHead; //new node is the new head
+	    }
+	    else {
+		DLLNode newHead = new DLLNode(x); //create alias for new node
+		newHead.setNext(head); //set next as the formerly-first node
+		head.setPrev(newHead); //set formerly-first node's previous to new node
+		head = newHead; //new node is the new head
+	    }
 	    size ++; //increment size
 	    return true; //it worked!
 	}
@@ -46,12 +36,13 @@ public class DLList implements List{
 	if ( i < 0 || i > size ) //index is in range
 	    throw new IndexOutOfBoundsException();
 	if (i == 0) {
-		add(x); 
-		return;} //if adding to front, use add
+	    add(x); 
+	    return;} //if adding to front, use add
 	DLLNode tmp = head; //set alias to the head
 	for (; i > 0; i--) {tmp = tmp.getNext();} //for tmp node at index
 	tmp.getPrev().setNext(new DLLNode(x)); //for tmp's previous' next, set next as new node
 	tmp.getPrev().getNext().setNext(tmp); //for new node, set next as tmp
+	tmp.setPrev(tmp.getPrev().getNext());
 	size++; //increment size
     }	
 
@@ -70,11 +61,11 @@ public class DLList implements List{
 	String ret = temp.getVal(); //store first value
 	temp.getPrev().setNext(temp.getNext()); //set prev node's next to next
 	if (temp.getNext() != null)
-		temp.getNext().setPrev(temp.getPrev()); //set next node's prev to prev
+	    temp.getNext().setPrev(temp.getPrev()); //set next node's prev to prev
 	return ret; //return stored value
     }
 
-    public String get(int i){
+    public T get(int i){
 	DLLNode temp = head;
 	while (i > 0) {temp = temp.getNext(); i--;}
 	return temp.getVal();
@@ -156,85 +147,85 @@ public class DLList implements List{
 }
 
 /**
-//Team JY - Joel Ye and Jennifer Yu
-//APCS1 pd10
-//HW14a -- On the DLL
-//2016 - 03 - 16
+ //Team JY - Joel Ye and Jennifer Yu
+ //APCS1 pd10
+ //HW14a -- On the DLL
+ //2016 - 03 - 16
 
-public class LList implements List{
-    private DLLNode head;
-    private int size; //tracks size to avoid excessive calculation each time.
+ public class LList implements List{
+ private DLLNode head;
+ private int size; //tracks size to avoid excessive calculation each time.
     
-    public LList(){
-	head = null;
-	size = 0;
-    }
+ public LList(){
+ head = null;
+ size = 0;
+ }
 	
-    public LList(DLLNode newNode){
-	head = newNode;
-	DLLNode temp = head;
-	size = 1;
-	while (temp.getNext() != null){
-	    size += 1;
-	    temp = temp.getNext();
-	}
-    }
+ public LList(DLLNode newNode){
+ head = newNode;
+ DLLNode temp = head;
+ size = 1;
+ while (temp.getNext() != null){
+ size += 1;
+ temp = temp.getNext();
+ }
+ }
 	
-    public int size(){return size;};
+ public int size(){return size;};
 	
-    public boolean add(String x){
-	try{
-	    DLLNode newHead = new DLLNode(x);
-	    newLead.setNext(head);
-	    head.setPrev(newHead);
-	    head = newHead;
-	    size ++;
-	    return true;
-	}
-	catch(Exception e){return false;}
-    }
+ public boolean add(String x){
+ try{
+ DLLNode newHead = new DLLNode(x);
+ newLead.setNext(head);
+ head.setPrev(newHead);
+ head = newHead;
+ size ++;
+ return true;
+ }
+ catch(Exception e){return false;}
+ }
 
-    public void add(String x, int i){
-	if ( i < 0 || i > size() )
-	    throw new IndexOutOfBoundsException();
-	size++;
-	if (i == 0) {add(x); return;}
-	DLLNode tmp = head;
-	for (; i > 0; i--) tmp = tmp.getLink();
-	tmp.getPrev.setNext(new DLLNode(x));
-	tmp.setPrev(tmp.getPrev().getNext());
-    }	
+ public void add(String x, int i){
+ if ( i < 0 || i > size() )
+ throw new IndexOutOfBoundsException();
+ size++;
+ if (i == 0) {add(x); return;}
+ DLLNode tmp = head;
+ for (; i > 0; i--) tmp = tmp.getLink();
+ tmp.getPrev.setNext(new DLLNode(x));
+ tmp.setPrev(tmp.getPrev().getNext());
+ }	
 
-    public String remove(int i){
-	if ( i < 0 || i >= size() )
-	    throw new IndexOutOfBoundsException();
-	size--;
-	DLLNode temp = head;
-	if (i == 0) {
-	    head = head.getNext();
-	    head.setPrev(null);
-	    return temp.getVal();}
-	for (; i > 0; i--){
-	    temp = temp.getLink();
-	}
-	String ret = temp.getVal();
-	temp.getPrev().setNext(temp.getNext());
-	temp.getNext().setPrev(temp.getPrev());
-	return ret;
-    }
+ public String remove(int i){
+ if ( i < 0 || i >= size() )
+ throw new IndexOutOfBoundsException();
+ size--;
+ DLLNode temp = head;
+ if (i == 0) {
+ head = head.getNext();
+ head.setPrev(null);
+ return temp.getVal();}
+ for (; i > 0; i--){
+ temp = temp.getLink();
+ }
+ String ret = temp.getVal();
+ temp.getPrev().setNext(temp.getNext());
+ temp.getNext().setPrev(temp.getPrev());
+ return ret;
+ }
 
-    public String get(int i){
-	DLLNode temp = head;
-	while (i > 0) {temp = temp.getNext(); i--;}
-	return temp.getVal();
-    };
+ public String get(int i){
+ DLLNode temp = head;
+ while (i > 0) {temp = temp.getNext(); i--;}
+ return temp.getVal();
+ };
 	
-    public String set(int i, String x){
-	DLLNode temp = head;
-	while (i > 0) {temp = temp.getNext(); i--;}
-	return temp.setVal(x);
-    };
+ public String set(int i, String x){
+ DLLNode temp = head;
+ while (i > 0) {temp = temp.getNext(); i--;}
+ return temp.setVal(x);
+ };
 
    
-}
+ }
 **/

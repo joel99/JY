@@ -1,10 +1,10 @@
 //Team Double Trouble - Joel Ye and Jennifer Yu
 //APCS1 pd10
-//HW14a -- On the DLL
-//2016 - 03 - 16
+//HW15 -- Generically Speaking
+//2016 - 03 - 17
 
-public class DLLNode{
-    private String val;
+public class<T> DLLNode{
+    private T val;
     private DLLNode next;
     private DLLNode prev;
 
