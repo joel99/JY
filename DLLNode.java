@@ -3,41 +3,46 @@
 //HW15 -- Generically Speaking
 //2016 - 03 - 17
 
-public class<T> DLLNode{
+public class DLLNode<T>{
     private T val;
     private DLLNode next;
     private DLLNode prev;
 
-    public DLLNode(String val){
+    public DLLNode (T val){
 	this.val = val;
     }
-    public DLLNode(String val, DLLNode prev, DLLNode next){
+    public DLLNode (T val, DLLNode<T> prev, DLLNode<T> next){
 	this.val = val;
 	this.next = next;
     }
-    public String getVal(){
+    public T getVal(){
 	return val;
     }
-    public String setVal(String newVal){
-	String temp = val;
+    public T setVal(T newVal){
+	T temp = val;
 	val = newVal;
 	return temp; 
     }
-    public DLLNode getNext(){
+    public DLLNode<T> getNext(){
 	return next;
     }
-    public DLLNode setNext(DLLNode newNext){
-	DLLNode temp = next;
+    public DLLNode<T> setNext(DLLNode<T> newNext){
+	DLLNode<T> temp = next;
 	next = newNext;
 	return temp;
     }
 
-    public DLLNode getPrev(){
+    public DLLNode<T> getPrev(){
 	return prev;
     }
-    public DLLNode setPrev(DLLNode newPrev){
-	DLLNode temp = prev;
+
+    public DLLNode<T> setPrev(DLLNode<T> newPrev){
+	DLLNode<T> temp = prev;
 	prev = newPrev;
 	return temp;
+    }
+
+    public String toString(){
+	return val.toString();
     }
 }
