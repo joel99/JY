@@ -25,9 +25,9 @@ public class LList<T> implements List<T>{
 	    }
 	    else {
 		DLLNode<T> newTail = new DLLNode<>(y); //create alias for new node
-		newTail.setPrev(tail); //set next as the formerly-first node
-		tail.setNext(newTail);
-		tail = tail.getNext();
+		newTail.setPrev(tail); //set prev of new tail as former tail
+		tail.setNext(newTail); //set next of former tail as new tail
+		tail = tail.getNext(); //set new tail as tail
 	    }
 	    size ++; //increment size
 	    return true; //it worked!
@@ -40,7 +40,7 @@ public class LList<T> implements List<T>{
 	    throw new IndexOutOfBoundsException();
 	if (i == 0) {
 	    add(x); 
-	    return;} //if adding to front, use add
+	    return;} //if adding to back, use add
 	DLLNode<T> tmp = head; //set alias to the head
 	for (; i > 0; i--) {tmp = tmp.getNext();} //for tmp node at index
 	tmp.getPrev().setNext(new DLLNode<T>(x)); //for tmp's previous' next, set next as new node
