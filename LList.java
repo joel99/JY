@@ -39,8 +39,19 @@ public class LList<T> implements List<T>{
 	if ( i < 0 || i > size ) //index is in range
 	    throw new IndexOutOfBoundsException();
 	if (i == 0) {
-	    add(x); 
+	    DLLNode<T> tmp = head; //set tmp to head
+	    DLLNode<T> tmp2 = new DLLNode<T>(x); //set tmp2 as new node
+	    tmp.setPrev(tmp2); //set prev of head to new node
+	    tmp2.setNext(tmp); //set next of new node to head
+	    tmp2.setPrev(null); //set prev of new node to null
+	    head = tmp2; //set new node as new head
+	    size++;
 	    return;} //if adding to back, use add
+	if (i == size-1) { //if last element use add
+		add(x);
+		size++;
+		return;
+	}
 	DLLNode<T> tmp = head; //set alias to the head
 	for (; i > 0; i--) {tmp = tmp.getNext();} //for tmp node at index
 	tmp.getPrev().setNext(new DLLNode<T>(x)); //for tmp's previous' next, set next as new node
@@ -58,6 +69,12 @@ public class LList<T> implements List<T>{
 	    head = head.getNext(); //set next node as new head
 	    head.setPrev(null); //cut it off from removed node
 	    return temp.getVal();} //return alias of old head
+	if (i == size-1) {
+		DLLNode<T> temp2 = tail; //set alias to the tail
+		tail = tail.getPrev(); //set new tail
+		tail.setNext(null); //set new tail's next to null
+		return temp2.getVal(); //return alias
+	}
 	for (; i > 0; i--){ //if removing another node
 	    temp = temp.getNext(); //set alias to node at index
 	}
@@ -99,8 +116,11 @@ public class LList<T> implements List<T>{
 	James.add("Food");
 	James.add("Coelum");
 	James.add("Poop");
+	System.out.println(James.size());
+	James.add(0, "Pokemon");
+	James.add(3, "Lala");
 	System.out.println(James);
-	James.remove(2);
+	James.remove(4);
 	System.out.println(James);
     }
 }
